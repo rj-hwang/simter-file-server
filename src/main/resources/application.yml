@@ -1,0 +1,39 @@
+# Application
+app:
+  backer:                             # 后台任务执行者
+    id: 0                             # 后台任务执行者 ID
+    name: 系统                         # 后台任务执行者名称
+  suggestion:
+    max-count: 8                      # 速查功能最多返回的数据条目数
+  contract:
+    auto-generate-payable-in: false   # 合同审核入库后是否自动生成应收
+
+# Web Server
+server:
+  port: 8083
+  server-header: simter-file-server
+  #context-path: / # Context path of the application.
+  session:
+    timeout: "3600" # Session timeout in seconds.
+  compression:
+    enabled: true
+    min-response-size: 2048
+
+# Spring-Boot
+spring:
+  main:
+    banner-mode: 'off'
+  # https://docs.spring.io/spring-boot/docs/current/reference/html/howto-spring-mvc.html#howto-customize-the-jackson-objectmapper
+  jackson:
+    defaultPropertyInclusion: non_empty # always|non_null|non_absent|non_default|non_empty
+
+# Logger
+logging:
+  file: target/app.log                 # will rotate when they reach 10 MB
+  level:                               # one of TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+    root: WARN
+    org.springframework: WARN
+    org.springframework.web: INFO
+    org.springframework.boot: INFO
+    org.springframework.boot.web.embedded: INFO # server port
+    tech.simter.file: DEBUG
